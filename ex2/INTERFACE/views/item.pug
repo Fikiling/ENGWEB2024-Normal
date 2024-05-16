@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-red
+            h1= title
+        .w3-container
+            each val, key in item
+                p
+                    strong #{key}: 
+                    |  #{val ? val : "Campo vazio"}
+        footer.w3-container.w3-red
+            address Gerado por a100696::Filipe Gonçalves.
+            a(href="/") Voltar 

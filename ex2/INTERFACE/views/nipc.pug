@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  .w3-card-4
+        header.w3-container.w3-red
+            h1= title
+        .w3-container
+
+            if lista.length === 0
+                p Nenhum item disponível
+            else
+                p 
+                    strong Nipc: 
+                    | #{lista[0].NIPC_entidade_comunicante }
+                p 
+                    strong Nome Entidade: 
+                    | #{lista[0].entidade_comunicante}
+                table.w3-table-all
+                    tr
+                        th Id Contrato
+                        th Objeto Contrato
+                        th Data Celebracao Contrato
+                        th Preço Contratual
+                        th Número Entidade Comunicante
+                        th Entidade Comunicante
+                    - var somaPrecos = 0.0
+                    each item in lista
+                        - somaPrecos += parseFloat(item.precoContratual.replace(',', '.'))
+                        tr
+                            td
+                                a(href="/"+item._id) #{item._id}
+                            td=item.objectoContrato
+                            td=item.dataCelebracaoContrato
+                            td=item.precoContratual
+                            td
+                                a(href="/entidades/"+item.NIPC_entidade_comunicante) #{item.NIPC_entidade_comunicante}
+                            td=item.entidade_comunicante
+                    tr
+                        td 
+                            strong Somatório:
+                        td 
+                            | #{somaPrecos.toFixed(2)} 
+        footer.w3-container.w3-red
+            address Gerado por a100696::Filipe Gonçalves
+            a(href="/") Voltar 
+
